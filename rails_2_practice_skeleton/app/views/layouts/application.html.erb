@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Goal App</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+  </head>
+
+  <body>
+    <% if login?%>
+      <form action="<%=session_url%>"method="post">
+         <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token %>">
+         <input type="hidden" name="_method" value="delete">
+         <input type="submit" value="Sign Out">
+      </form>
+    <%end%>
+    <% if flash[:errors]%>
+      <ul>
+        <% flash[:errors].each do |er|%>
+          <li>
+            <%= er %>
+          </li>
+        <%end%>
+      </ul>
+    <%end%>
+    <%= yield %>
+  </body>
+</html>
